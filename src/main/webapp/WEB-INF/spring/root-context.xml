@@ -4,5 +4,9 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+   <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+   		<property name="defaultEncoding" value="UTF-8"></property>
+   		<property name="maxUploadSize" value="10000000"></property><!-- total upload size: 10,000,000 -->
+ 		<property name="maxInMemorySize" value="10000000"></property>  <!-- buffer size -->
+   </bean>			
 </beans>
