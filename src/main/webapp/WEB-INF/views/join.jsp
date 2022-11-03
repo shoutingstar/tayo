@@ -139,7 +139,7 @@ $("#join").click(function(){
 			alert("비밀번호를 입력해 주세요");
 			$pw.focus();
 		}else if($pw.val().match(pwRule) == null){
-			alert("비밀번호는 6자 이상 입력해주세요");
+			alert("비밀번호를 조건에 맞게 입력해 주세요");
 			$pw.focus();
 		}else if($pwChk.val()==''){
 			alert("비밀번호 확인을 입력해 주세요");
