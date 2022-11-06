@@ -43,10 +43,10 @@ public class MemberController {
 		String page = "login";
 		
 		String loginId = service.login(id,pw);
-		logger.info("loginId : "+loginId);
 		
 		if(loginId != null && !loginId.equals("")) {
-			page = "loginMain";
+//			page = "loginMain";
+			page = "redirect:/index";
 			HttpSession session = req.getSession();
 			session.setAttribute("loginId", loginId);
 		}else {
@@ -56,10 +56,31 @@ public class MemberController {
 		return page;
 	}
 	
+	/* mbti 체크 */
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public String mbtiChk(Model model, HttpSession session) {
+		String loginId = (String) session.getAttribute("loginId");
+		String page = "login";
+		String mbti = service.mbti(loginId);
+		
+		if(loginId != null && !loginId.equals("")) {
+			page = "loginMain";
+		}else {
+			model.addAttribute("msg", "로그인이 필요한 서비스입니다.");
+		}
+		
+		if(mbti != null && !mbti.equals("")) {
+			session.setAttribute("mbti", mbti);
+		}
+		
+		return page;
+	}
+	
 	/* 로그아웃 */
 	@RequestMapping(value = "/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("loginId");
+		session.removeAttribute("mbti");
 		return "redirect:/";
 	}
 	
@@ -77,7 +98,7 @@ public class MemberController {
 		String pnum = params.get("pnum").replaceAll("[^0-9]", ""); //하이픈 제거
 		String email = params.get("email").replaceAll("\\s", "");
 		String add = params.get("add");
-		String detailAdd = params.get("detailAdd");
+		String detailAdd = params.get("detailAdd").trim();
 		String name = params.get("name").replaceAll("\\s", "");
 		String age = params.get("age").replaceAll("\\s", "");
 		
@@ -109,9 +130,9 @@ public class MemberController {
 	@RequestMapping(value = "/findId", method = RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String, Object> findId(@RequestParam HashMap<String, String> params) {
-		String name = params.get("name");
-		String email = params.get("email");
-		String pnum = params.get("pnum");
+		String name = params.get("name").replaceAll("\\s", "");
+		String email = params.get("email").replaceAll("\\s", "");
+		String pnum = params.get("pnum").replaceAll("[^0-9]", "");
 		
 		String id = service.findId(name,email,pnum);
 		
@@ -129,10 +150,9 @@ public class MemberController {
 	
 	@RequestMapping(value = "/findPw", method = RequestMethod.POST)
 	public String findPw(Model model, HttpServletRequest req) {
-		String name = req.getParameter("mem_name");
-		String email = req.getParameter("mem_email");
-		String pnum = req.getParameter("mem_pnum");
-		
+		String name = req.getParameter("mem_name").replaceAll("\\s", "");
+		String email = req.getParameter("mem_email").replaceAll("\\s", "");
+		String pnum = req.getParameter("mem_pnum").replaceAll("[^0-9]", "");
 		String id = service.findId(name,email,pnum);
 		
 		model.addAttribute("id",id);
@@ -144,8 +164,8 @@ public class MemberController {
 	@RequestMapping(value = "/changePw", method = RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String, Object> changePw(@RequestParam HashMap<String, String> params) {
-		String id = params.get("id");
-		String pw = params.get("pw");
+		String id = params.get("id").replaceAll("\\s", "");
+		String pw = params.get("pw").replaceAll("\\s", "");
 		
 		int row = service.update(id, pw);
 		
@@ -154,5 +174,30 @@ public class MemberController {
 		
 		return map;
 	}
-
+	
+	/* 이벤트 페이지 */	
+	@RequestMapping(value = "/eventPage", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> eventPage(@RequestParam HashMap<String, String> params, HttpServletRequest req) {
+		String marry = params.get("marry").replaceAll("\\s", "");
+		String children = params.get("children").replaceAll("\\s", "");
+		String familly = params.get("familly").replaceAll("\\s", "");
+		String mbti = params.get("mbti").replaceAll("\\s", "").toUpperCase();
+		
+		HttpSession session = req.getSession();
+		String loginId = (String) session.getAttribute("loginId");
+		
+		logger.info("loginId : "+loginId);
+		logger.info("marry : "+marry);
+		logger.info("children : "+children);
+		logger.info("familly : "+familly);
+		logger.info("mbti : "+mbti);
+		
+		int row = service.eventPage(loginId,marry,children,familly,mbti);
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("row", row);
+		
+		return map;
+	}
 }

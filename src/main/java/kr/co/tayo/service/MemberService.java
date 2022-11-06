@@ -19,6 +19,11 @@ public class MemberService {
 	public String login(String id, String pw) {
 		return dao.login(id, pw);
 	}
+	
+	//mbti 체크
+	public String mbti(String loginId) {
+		return dao.mbti(loginId);
+	}
 
 	//회원가입
 	public int join(String id, String pw, String pnum, String email, String add, String detailAdd, String name,
@@ -40,6 +45,11 @@ public class MemberService {
 	//비밀번호 변경
 	public int update(String id, String pw) {
 		return dao.update(id, pw);
+	}
+	
+	//이벤트 페이지
+	public int eventPage(String loginId, String marry, String children, String familly, String mbti) {
+		return dao.eventPage(loginId, marry, children, mbti, familly);
 	}
 
 }

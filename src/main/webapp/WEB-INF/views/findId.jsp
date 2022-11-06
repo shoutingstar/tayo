@@ -6,7 +6,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<style></style>
+<style>
+#phonChk {
+	color : red;
+	font-size: 14px;
+	font-weight: bold;
+}
+</style>
 </head>
 <body>
 <h2>아이디 찾기</h2>
@@ -15,16 +21,18 @@
 	<table>
 		<tr>
 			<th>이름</th>
-			<td><input type="text" id="mem_name"></td>
+			<td><input type="text" id="mem_name" placeholder="이름을 입력해 주세요"></td>
 		</tr>
 		<tr>
 			<th>이메일</th>
-			<td><input type="text" id="mem_email"></td>
+			<td><input type="text" id="mem_email" placeholder="이메일을 입력해 주세요"></td>
 		</tr>
 		<tr>
 			<th>휴대폰 번호</th>
-			<td><input type="text" id="mem_pnum"></td>
-			<td>ex) 하이픈(`-`)을 입력해주세요 010-0000-0000</td>
+			<td>
+			<input type="text" id="mem_pnum" onkeyup="phonChk()" placeholder="휴대폰 번호를 입력해 주세요">
+			<div id="phonChk" style="color: gray;">휴대폰 번호에 하이픈(`-`)을 넣어 주세요</div>
+			</td>
 		</tr>
 		<tr>
 			<th colspan="2">
@@ -35,17 +43,23 @@
 	</table>
 </body>
 <script>
+const nameRule = /^[가-힣]{2,}$/
+var emailRule = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+var phonRule = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/
+
+function phonChk(){
+	var pnum = document.getElementById('mem_pnum').value;
+	
+	if(pnum.match(phonRule) == null || pnum =='010-0000-0000'){
+		document.getElementById('phonChk').style.color = 'red';
+		document.getElementById('phonChk').innerHTML = "! 휴대폰 번호에 하이픈(`-`)을 넣어 주세요"+"<br>"+"예)010-0000-0000";
+	}else{
+		document.getElementById('phonChk').style.color = "green";
+		document.getElementById('phonChk').innerHTML = "휴대폰 번호 입력 조건을 충족하셨습니다."; 
+	}
+}
+
 $("#confirm").click(function(){
-	
-	// 이름 정규식
-	const nameRule = /^[가-힣]{2,}$/
-	
-	// 이메일 정규식
-	var emailRule = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-	
-	//폰 번호 정규식
-	var phonRule = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/
-	
 	$name = $("#mem_name");
 	$email = $("#mem_email");
 	$pnum = $("#mem_pnum");

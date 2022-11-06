@@ -12,4 +12,8 @@ public interface Member_DAO {
 
 	int update(String id, String pw);
 
+	int eventPage(String loginId, String marry, String children, String mbti, String familly);
+
+	String mbti(String loginId);
+
 }

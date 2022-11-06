@@ -6,7 +6,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<style></style>
+<style>
+#phonChk {
+	color : gray;
+	font-size: 14px;
+	font-weight: bold;
+}
+</style>
 </head>
 <body>
 <h2>비밀번호 찾기</h2>
@@ -16,15 +22,17 @@
 	<table>
 		<tr>
 			<th>이름</th>
-			<td><input type="text" name="mem_name"></td>
+			<td><input type="text" name="mem_name" placeholder="이름을 입력해 주세요"></td>
 		</tr>
 		<tr>
 			<th>이메일</th>
-			<td><input type="text" name="mem_email"></td>
+			<td><input type="text" name="mem_email" placeholder="이메일을 입력해 주세요"></td>
 		</tr>
 		<tr>
 			<th>휴대폰 번호</th>
-			<td><input type="text" name="mem_pnum"></td>
+			<td>
+			<input type="text" name="mem_pnum" placeholder="휴대폰 번호를 입력해 주세요">
+			</td>
 		</tr>
 		<tr>
 			<th colspan="2">
@@ -35,5 +43,6 @@
 	</table>
 </form>
 </body>
-<script></script>
+<script>
+</script>
 </html>
