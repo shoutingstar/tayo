@@ -54,6 +54,12 @@ div.right {
     box-sizing: border-box;
 }
 
+.modal-content2 {
+margin: 7% auto;
+padding: 20px;
+border: 1px solid #888;
+}
+
 </style>
 </head>
 <body>
@@ -121,7 +127,9 @@ div.right {
 				</div>
 				<div class="right" style="line-height:30px">
 					<input type="text" id="mbti">
-				</div>	
+					<br>
+					<button id="mbtiOpen">mbti 목록</button>
+				</div>
 				<br>
 				<br>
 				<br>
@@ -133,11 +141,28 @@ div.right {
 			style="background-color: gray; cursor: pointer; text-align: center; 
 			padding-top: 10px; padding-bottom: 10px; border-color: gray;
 			width: 200px; height: 50px; font-size: 14pt; color: white;">
-			제출
+				제출
 			</button>
 		</div>
 		</div>
 	</div>
+	
+	<!-- Modal -->
+  <div class="modal fade" id="mbtiImg" role="dialog" style="position: fixed;">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content2">
+        <div class="modal-body2">
+          	<img src="resources/img/mbti.PNG" style="float: left;">
+        <div style="float: left;"><button type="button" class="close" data-dismiss="modal" onClick="close_mbtiOpen();" 
+				style="width: 35px; height: 35px; font-size: 22pt; position: absolute;">&times;</button></div>
+        </div>
+      </div>
+      
+    </div>
+   </div>
+
 </body>
 <script>
 // var familly;
@@ -145,7 +170,6 @@ div.right {
 var seMbti = '<%=(String)session.getAttribute("mbti")%>';
 var reg = /^[0-9]+/g; //숫자만 입력하는 정규식
 var mbtiRule = /^[a-zA-Z]{4}$/;
-
 
 jQuery(document).ready(function() {
 	if(seMbti=='null'){
@@ -158,6 +182,16 @@ jQuery(document).ready(function() {
 function close_pop(flag) {
  $('#myModal').hide(); //모달 닫기
 };
+
+
+$("#mbtiOpen").click(function(){
+	$('#mbtiImg').show();
+})
+
+$("#mbtiImg").click(function(){
+	$('#mbtiImg').hide();
+})
+
 
 // 전송
 $("#submit").click(function(){
@@ -179,7 +213,21 @@ $("#submit").click(function(){
 	}else if(mbti=='' || mbti==null){ // 여긴 수정중
 		alert("MBTI를 입력해 주세요");
 		document.getElementById("mbti").focus();
-	}else if(mbti.match(mbtiRule) == null){
+	}else if( (mbti!='ISTJ')&&(mbti!='ISFJ')&&(mbti!='INFJ')&&(mbti!='INTJ')&&
+			(mbti!='ISTP')&&(mbti!='ISFP')&&(mbti!='INFP')&&(mbti!='INTP')&&
+			(mbti!='ESTP')&&(mbti!='ESFP')&&(mbti!='ENFP')&&(mbti!='ENTP')&&
+			(mbti!='ESTJ')&&(mbti!='ESFJ')&&(mbti!='ENFJ')&&(mbti!='ENTJ')&&
+			(mbti!='istj')&&(mbti!='isfj')&&(mbti!='infj')&&(mbti!='intj')&&
+			(mbti!='istp')&&(mbti!='isfp')&&(mbti!='infp')&&(mbti!='intp')&&
+			(mbti!='estp')&&(mbti!='esfp')&&(mbti!='enfp')&&(mbti!='entp')&&
+			(mbti!='estj')&&(mbti!='esfj')&&(mbti!='enfj')&&(mbti!='entj') )
+		{
+			console.log(mbti);
+			alert("MBTI를 정상적으로 입력해 주세요");
+			document.getElementById("mbti").focus();
+		}
+	
+	else if(mbti.match(mbtiRule) == null){
 		alert("영어만 입력해 주세요.(4글자)");
 		document.getElementById("familly").focus();
 	}else {
