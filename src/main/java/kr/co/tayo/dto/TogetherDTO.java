@@ -11,6 +11,8 @@ public class TogetherDTO {
 	 private String mem_id; 
 	 private int bo_num; 
 	 private int cnt;
+	 private String se_secret;// 비공개
+	 
 	public int getNum() {
 		return num;
 	}
@@ -53,5 +55,12 @@ public class TogetherDTO {
 	public void setCnt(int cnt) {
 		this.cnt = cnt;
 	}
+	public String getSe_secret() {
+		return se_secret;
+	}
+	public void setSe_secret(String se_secret) {
+		this.se_secret = se_secret;
+	}
+	
 
 }

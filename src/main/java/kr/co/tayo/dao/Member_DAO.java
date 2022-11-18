@@ -16,4 +16,8 @@ public interface Member_DAO {
 
 	String mbti(String loginId);
 
+	int join1(String id);
+
+	String login1(String id, String pw);
+
 }

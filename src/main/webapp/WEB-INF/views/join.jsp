@@ -14,13 +14,16 @@ margin : auto;
 }
 
 table, td, tr {
-/* 	border: 1px solid black; */
-	border-collapse: collapse;
+	height: 50px;
 }
 
 td {
 	padding: 5px;
 /* 	text-align: center; */
+}
+
+th{
+	color : #2d467b;
 }
 
 #thbody {
@@ -29,75 +32,99 @@ td {
 
 #checkPwd, #pwr, #phonChk, #idChk1, #idChk2{
   color : red;
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 12px;
 }
+#outterDiv {
+	border: 1px solid;
+    width: 800px;
+    margin: auto;
+    border-color: #2d467b;
+}
+
+#mem_id, #mem_pw, #mem_pwCheck, #mem_pnum, #mem_email, #mem_add, #mem_detailAdd, #mem_name, #mem_age {
+	width:400px; 
+	height:30px;
+}
+
+#id_check, #findAdd{
+	cursor: pointer;
+	height: 34px;
+	background-color: #2d467b;
+	color: white;
+	border-radius: 10px;
+	border: 0;
+	outline: 0;
+}
+
+#join{
+	width: 150px; height: 50px; border: 0; outline: 0; cursor: pointer; 
+	border-radius: 10px; background-color: #2d467b; color: white; font-size: 18px; margin-bottom: 20px;
+}
+
 </style>
 </head>
 <body>
-	<div>
-	<h2 style="text-align: center;">회원가입</h2>
+	<div id="outterDiv">
+	<h2 style="text-align: center; color:#2d467b;">회원가입</h2>
 		<table>
 			<tr>
 				<th id="thbody">ID</th>
 				<td>
-					<input type="text" id="mem_id" onkeyup="idChk()" value="" placeholder="아이디를 입력해 주세요" style="width:300px; height:20px;">
-					<input type="button" id="id_check" style="cursor: pointer;" value="중복확인">
-					<div id="idChk1" style="color: gray;">영문, 숫자만 사용 가능합니다.</div>
-					<div id="idChk2" style="color: gray;">ID 중복 확인을 해 주세요</div>
+					<input type="text" id="mem_id" onkeyup="idChk()" value="" placeholder="아이디를 입력해 주세요" >
+					<input type="button" id="id_check" value="중복확인">
+					<div id="idChk1" style="color: #B1B1B1;">영문, 숫자만 사용 가능합니다.</div>
+					<div id="idChk2" style="color: #B1B1B1;">ID 중복 확인을 해 주세요</div>
 				</td>
 			</tr>
 			<tr>
 				<th id="thbody">비밀번호</th>
 				<td>
-					<input type="password" id="mem_pw" onkeyup="pwr()" value="" placeholder="비밀번호를 입력해 주세요" style="width:300px; height:20px;">
-					<div id="pwr" style="color: gray;">6자 이상 영문, 숫자를 사용하세요</div>
+					<input type="password" id="mem_pw" onkeyup="pwr()" value="" placeholder="비밀번호를 입력해 주세요">
+					<div id="pwr" style="color: #B1B1B1;">6자 이상 영문, 숫자를 사용하세요</div>
 				</td>
 			</tr>
 			<tr>
 				<th id="thbody">비밀번호 확인</th>
 				<td>
-					<input type="password" id="mem_pwCheck" onkeyup="checkPwd()" style="width:300px; height:20px;" value="" placeholder="비밀번호 확인을 입력해 주세요" ><br>
+					<input type="password" id="mem_pwCheck" onkeyup="checkPwd()" value="" placeholder="비밀번호 확인을 입력해 주세요" ><br>
 					<div id="checkPwd"></div>
 				</td>
 			</tr>
 			<tr>
 				<th id="thbody">핸드폰 번호</th>
 				<td>
-					<input type="text" id="mem_pnum" onkeyup="phonChk()" style="width:300px; height:20px;" value="" placeholder="핸드폰 번호를 입력해 주세요">
-					<div id="phonChk" style="color: gray;">핸드폰 번호에 하이픈(`-`)을 넣어 주세요</div>
+					<input type="text" id="mem_pnum" onkeyup="phonChk()" value="" placeholder="핸드폰 번호를 입력해 주세요">
+					<div id="phonChk" style="color: #B1B1B1;">핸드폰 번호에 하이픈(`-`)을 넣어 주세요</div>
 				</td>
 			</tr>
 			<tr>
 				<th id="thbody">이메일</th>
-				<td><input type="text" id="mem_email" style="width:300px; height:20px;" value="" placeholder="이메일을 입력해 주세요"></td>
+				<td><input type="text" id="mem_email" value="" placeholder="이메일을 입력해 주세요"></td>
 			</tr>
 			<tr>
 				<th id="thbody">주소</th>
-				<td><input type="text" id="mem_add" style="width:300px; height:20px;" value="" readonly placeholder="주소찾기를 해주세요">
-				<input type="button" onclick="addr()" style="cursor: pointer;" value="주소찾기">
+				<td><input type="text" id="mem_add" value="" readonly placeholder="주소찾기를 해주세요">
+				<input type="button" id="findAdd" onclick="addr()" style="cursor: pointer; height: 34px;" value="주소찾기">
 				</td>
 			</tr>
 			<tr>
 				<th id="thbody">상세주소</th>
 				<td>
-				<input type="text" id="mem_detailAdd" style="width:300px; height:20px;" value="" placeholder="상세주소를 입력해 주세요">
+				<input type="text" id="mem_detailAdd" value="" placeholder="상세주소를 입력해 주세요">
 				</td>
 			</tr>
 			<tr>
 				<th id="thbody">이름</th>
-				<td><input type="text" id="mem_name" style="width:300px; height:20px;" value="" placeholder="이름을 입력해 주세요"></td>
+				<td><input type="text" id="mem_name" value="" placeholder="이름을 입력해 주세요"></td>
 			</tr>
 			<tr>
 				<th id="thbody">나이</th>
-				<td><input type="text" id="mem_age" style="width:300px; height:20px;" value="" placeholder="나이를 입력해 주세요"></td>
+				<td><input type="text" id="mem_age" value="" placeholder="나이를 입력해 주세요"></td>
 			</tr>
 		</table>
 		<br>
 		<div style="text-align: center;">
-			<button id="join" style="width: 150px; height: 50px; border: 0; outline: 0; cursor: pointer; 
-			border-radius: 10px; background-color: #444444; color: white; font-size: 18px;">
-			회원가입</button>
+			<button id="join">회원가입</button>
 		</div>
 	</div>
 </body>

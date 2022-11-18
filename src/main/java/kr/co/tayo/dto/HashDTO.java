@@ -52,6 +52,13 @@ public class HashDTO {
 		this.ha_value = ha_value;
 	}
 	
+	private int page;
 
+	public int getPage() {
+		return page;
+	}
+	public void setPage(int page) {
+		this.page = page;
+	}
 
 }

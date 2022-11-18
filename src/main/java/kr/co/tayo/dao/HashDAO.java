@@ -9,11 +9,11 @@ public interface HashDAO {
 
 	
 
-	ArrayList<HashDTO> hashlist();
+	
 
 
 
-	ArrayList<HashDTO> list();
+//	ArrayList<HashDTO> list();
 
 	int delete(String id);
 
@@ -32,8 +32,43 @@ public interface HashDAO {
 	HashDTO Form(HashMap<String, String> ha_num);
 
 
+	/*
+	 * HashMap<String, Object> search(HashMap<String, String> param);
+	 */
+
+
+
+	int totalCount();
+
+
+
+	ArrayList<HashMap<String, Object>> list(int offset);
+
+
 
 	ArrayList<HashDTO> search(HashMap<String, String> param); 
+
+
+	int totalCount2(HashMap<String, String> param);
+
+
+	int totalCount3(HashMap<String, String> param);
+
+
+
+
+
+	/*
+	 * ArrayList<HashMap<String, Object>>search(String ha_name, String ca_name, int
+	 * offset);
+	 */
+
+
+
+
+
+
+
 
 	/*
 	 * ArrayList<HashDTO> search(String param);

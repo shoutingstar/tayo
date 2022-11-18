@@ -10,6 +10,7 @@
 <style></style>
 </head>
 <body>
+<jsp:include page="Adminheader.jsp"></jsp:include>
 		<table>
 			<tr>
 				<td colspan="2">${total.title}</td>
@@ -23,9 +24,8 @@
 			</tr>
 			<tr>
 				<td colspan="2" class="btn_area">
-					<button type="button" onclick="location.href='./updateForm?num=${total.num}'">수정하기</button>
-					<button type="button" onclick="location.href='./'">목록</button>
-					<button type="button" onclick="location.href='./delete?num=${total.num}'">삭제</button>
+					<button type="button" onclick="location.href='./A_Togetherlist'">목록</button>
+					<button type="button" onclick="location.href='./A_Togetherdelete?num=${total.num}'">삭제</button>
 				</td>
 			</tr>		
 		</table>

@@ -24,10 +24,10 @@ public class MemberController {
 	
 	@Autowired MemberService service;
 	
-	/* 임시 메인 */
+	/* 메인페이지  */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String index(Model model) {
-		return "index";
+	public String Main(Model model) {
+		return "Main";
 	}
 	
 	/* 로그인 */
@@ -43,21 +43,40 @@ public class MemberController {
 		String page = "login";
 		
 		String loginId = service.login(id,pw);
+		logger.info("loginId:"+loginId);
+		String power = service.login1(id, pw);
+		logger.info("power:"+power);
 		
 		if(loginId != null && !loginId.equals("")) {
 //			page = "loginMain";
-			page = "redirect:/index";
-			HttpSession session = req.getSession();
-			session.setAttribute("loginId", loginId);
+			if(loginId.equals("admin")) {				
+				page = "redirect:/loginBestadminMain";
+				HttpSession session = req.getSession();
+				session.setAttribute("loginId", loginId);
+				session.setAttribute("power", power);
+				
+			}else if(power.equals("2")){
+				page = "redirect:/loginadminMain";
+				HttpSession session = req.getSession();
+				session.setAttribute("loginId", loginId);
+				session.setAttribute("power", power);
+				
+			}else{
+				page = "redirect:/loginMain";
+				HttpSession session = req.getSession();
+				session.setAttribute("loginId", loginId);
+				session.setAttribute("power", power);
+			}
+			
 		}else {
 			model.addAttribute("msg", "아이디 또는 패스워드를 확인해 주세요");
 		}
-		
+
 		return page;
 	}
 	
 	/* mbti 체크 */
-	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	@RequestMapping(value = "/loginMain", method = RequestMethod.GET)
 	public String mbtiChk(Model model, HttpSession session) {
 		String loginId = (String) session.getAttribute("loginId");
 		String page = "login";
@@ -75,13 +94,30 @@ public class MemberController {
 		
 		return page;
 	}
+
+	@RequestMapping(value = "/loginadminMain", method = RequestMethod.GET)
+	public String loginadminMain(Model model) {
+		return "loginadminMain";
+	}
+	
+	@RequestMapping(value = "/loginBestadminMain", method = RequestMethod.GET)
+	public String loginBestadminMain(Model model) {
+		return "loginBestadminMain";
+	}
+	
+	
+	
+	
+	
+	
 	
 	/* 로그아웃 */
 	@RequestMapping(value = "/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("loginId");
 		session.removeAttribute("mbti");
-		return "redirect:/";
+		session.invalidate();
+		return "logout";
 	}
 	
 	/* 회원가입 */

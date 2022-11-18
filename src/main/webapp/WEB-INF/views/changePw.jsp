@@ -6,39 +6,158 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <style>
 #checkPwd, #pwr {
 	color : red;
-	font-size: 14px;
-	font-weight: bold;
+	font-size: 12px;
 }
+
+input {
+        height: 40px;
+        width: 100%;
+		margin-left: 20px auto;
+		margin-right: 20px auto;
+        border-left: none;
+        border-right: none;
+        border-top: none;
+        color: white;
+        background: #0b2144;
+  		padding-left:5px;
+        font-family: FontAwesome, "Open Sans", Verdana, sans-serif;
+    	font-style: normal;
+    	font-weight: normal;
+    	text-decoration: inherit;
+    }
+    
+    button {
+        height: 50px;
+        width: 35%;
+        border-radius: 4px;
+        margin-top: 10px;
+        border: none;
+        background: white;
+        color: black;
+        font-family: sans-serif;
+        font-weight: 700;
+        font-size: 14pt;
+        cursor: pointer;
+    }
+    
+     .findDiv {
+        width: 90%;
+        margin: 40px auto;
+        text-align: center;
+    }
+    
+    input:focus {
+        outline: none
+    }
+    
+    .logo {
+        color: white;
+        font-family: sans-serif;
+        font-size: 15pt;
+        font-weight: 600;
+        text-align: center;
+        padding-top: 40px;
+        margin-bottom: 70px;
+    }
+    
+    .myform {
+        background: #0b2144;
+        width: 40%;
+        margin: auto;
+        height: 600px;
+        -webkit-box-shadow: 0px 0px 3px 1px rgba(38, 35, 128, 1);
+        -moz-box-shadow: 0px 0px 3px 1px rgba(38, 35, 128, 1);
+        box-shadow: 0px 0px 3px 1px rgba(38, 35, 128, 1);
+    }
+    
+    .myform a {
+        text-decoration: none;
+        color: white;
+        font-family: sans-serif;
+        letter-spacing: .1em;
+    }
+    
+     ::-webkit-input-placeholder {
+        /* Chrome/Opera/Safari */
+         color: #cccccc;
+       
+    }
+	.fa-cloud-upload{
+	  font-size:90px;
+	  
+	}
+    
+    ::-moz-placeholder {
+        /* Firefox 19+ */
+        color: #cccccc;
+          }
+    
+    :-ms-input-placeholder {
+        /* IE 10+ */
+         color: #cccccc;
+         }
+    
+    :-moz-placeholder {
+        /* Firefox 18- */
+        color: #cccccc;
+      
+    }
+  @media screen and (max-width:500px){
+        .myform{
+            width:80%;
+        }
+    }
+    @media screen and (max-width:800px){
+        .myform{
+            width:60%;
+        }
+    }
+    
+	ul {
+		list-style: none;
+		width: 200px;
+		margin-left: auto;
+  		margin-right: auto;
+	}
+
+	li {
+	    margin: 0 0 0 0;
+	    padding: 0 0 0 0;
+	    border : 0;
+	    float: left;
+	}
+	.put {
+		text-align: left;
+		color: white;
+		font-weight: bold;
+		margin-bottom: 3px;
+	}
 </style>
 </head>
 <body>
-<h2>비밀번호 변경하기</h2>
-<input type="hidden" id="id" value="${id}">
-	<table>
-		<tr>
-			<th>새 비밀번호</th>
-			<td>
-				<input type="password" id="mem_pw" onkeyup="pwr()" value="" placeholder="비밀번호를 입력해 주세요" >
-				<div id="pwr" style="color: gray;">6자 이상 영문, 숫자를 사용하세요</div>
-			</td>
-		</tr>
-		<tr>
-			<th>비밀번호 확인</th>
-			<td>
-				<input type="password" id="mem_pwCheck" onkeyup="checkPwd()" placeholder="비밀번호 확인을 입력해 주세요">
-				<div id="checkPwd"></div>
-			</td>
-		</tr>
-		<tr>
-			<th colspan="2">
-			<input id="changePw" type="button" value="확인">
-			<input type="button" value="취소" onclick="location.href='./'">
-			</th>
-		</tr>
-	</table>
+	<div class="myform">
+	    <div class="logo">
+	    	<h1>비밀번호 변경하기</h1>
+	    	<input type="hidden" id="id" value="${id}">
+	  	</div>
+	  	<div class="findDiv">
+	  		<p class="put"> 비밀번호 입력 </p>
+	    	<input type="password" id="mem_pw" onkeyup="pwr()" value="" placeholder="&#xf023;   비밀번호를 입력해 주세요" >
+	    	<p id="pwr" style="color: gray; text-align: left;margin-top: 5px;">6자 이상 영문, 숫자를 사용하세요</p>
+	    	<br>
+	    	<p class="put"> 비밀번호 확인 </p>
+	    	<input type="password" id="mem_pwCheck" onkeyup="checkPwd()" placeholder="&#xf023;   비밀번호를 확인해 주세요">
+	    	<p id="checkPwd" style="text-align: left;margin-top: 5px;"></p>
+	    	<div style="margin-top: 55px;">
+		    	<button type="submit" id="changePw" style="margin-right: 5px;">확인</button>
+		        <button onclick="location.href='./loginForm'" style="margin-left: 5px;">취소</button>
+	        </div>
+	    </div>
+	</div>
 </body>
 <script>
 $id = $("#id");

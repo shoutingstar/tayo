@@ -28,7 +28,7 @@ public class MemberService {
 	//회원가입
 	public int join(String id, String pw, String pnum, String email, String add, String detailAdd, String name,
 			String age) {
-		return dao.join(id,pw,pnum,email,add,detailAdd,name,age);
+		return dao.join(id,pw,pnum,email,add,detailAdd,name,age)+dao.join1(id);
 	}
 	
 	//회원가입-아이디 중복체크
@@ -50,6 +50,11 @@ public class MemberService {
 	//이벤트 페이지
 	public int eventPage(String loginId, String marry, String children, String familly, String mbti) {
 		return dao.eventPage(loginId, marry, children, mbti, familly);
+	}
+
+	public String login1(String id, String pw) {
+		
+		return dao.login1(id, pw);
 	}
 
 }
